@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.29)
+project(vadere)
+
+set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIGURATION>")
+
+add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
+
+set(SOURCE_FILES
+    main.c
+)
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
+add_compile_options(-Wall -Wextra -Wpedantic)
